@@ -1,4 +1,4 @@
-package alyona.forma.controller
+package alyona.forma.controller.constant
 
 import alyona.forma.repository.TrainingLevelRepository
 import org.springframework.security.access.prepost.PreAuthorize

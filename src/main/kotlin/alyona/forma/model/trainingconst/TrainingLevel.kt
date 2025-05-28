@@ -1,8 +1,13 @@
-package alyona.forma.model
+package alyona.forma.model.trainingconst
 
-import jakarta.persistence.*
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
+import jakarta.persistence.Id
+import jakarta.persistence.Table
 import org.hibernate.annotations.UuidGenerator
-import java.util.*
+import java.util.UUID
 
 @Entity
 @Table(name = "training_levels")

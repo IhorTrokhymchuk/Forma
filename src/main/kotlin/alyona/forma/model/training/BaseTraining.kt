@@ -1,6 +1,6 @@
 package alyona.forma.model.training
 
-import alyona.forma.model.TrainingLevel
+import alyona.forma.model.trainingconst.TrainingLevel
 import jakarta.persistence.*
 import org.hibernate.annotations.UuidGenerator
 import java.util.*

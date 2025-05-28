@@ -3,7 +3,7 @@ package alyona.forma.mapper
 import alyona.forma.dto.basetraining.BaseTrainingRequestDto
 import alyona.forma.dto.basetraining.BaseTrainingResponseDto
 import alyona.forma.exception.EntityNotFoundException
-import alyona.forma.model.TrainingLevel
+import alyona.forma.model.trainingconst.TrainingLevel
 import alyona.forma.model.training.BaseExToPosition
 import alyona.forma.model.training.BaseTraining
 import alyona.forma.repository.BaseExToPositionRepository
