@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: Forma
+  datasource:
+    url: jdbc:postgresql://localhost:5432/forma
+    username: root
+    password: root
+  jpa:
+    hibernate.ddl-auto: create-drop
+#    hibernate.ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        format_sql: true
+        order_by:
+          default_null_ordering: last
+
+forma:
+  security:
+    jwt:
+      secret: secretforjwttoken1234
+      lifetime: 3600000
