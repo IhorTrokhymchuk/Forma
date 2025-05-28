@@ -9,5 +9,4 @@ class BaseExerciseRequestDto(
     val videoUrl: String,
     val mainImage: String?,
     val miniImage: String?,
-    val baseSetIds: List<UUID>
 )

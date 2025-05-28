@@ -11,5 +11,4 @@ data class BaseExerciseResponseDto(
     val videoUrl: String,
     val mainImage: String?,
     val miniImage: String?,
-    val baseSets: List<BaseSetResponseDto>
 )

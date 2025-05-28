@@ -18,22 +18,15 @@ import java.util.UUID
 @Mapper(
     componentModel = "spring",
     injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-    uses = [
-        BaseSetMapper::class
-    ]
 )
 abstract class BaseExerciseMapper {
     @Autowired
     protected lateinit var muscleGroupRepository: MuscleGroupRepository
 
-    @Autowired
-    protected lateinit var baseSetRepository: BaseSetRepository
-
     @Mapping(target = "muscleGroupName", source = "muscleGroup.name")
     abstract fun toBaseExerciseResponseDto(baseExercise: BaseExercise): BaseExerciseResponseDto
 
     @Mapping(target = "muscleGroup", source = "muscleGroupId", qualifiedByName = ["getMuscleGroupById"])
-    @Mapping(target = "baseSets", source = "baseSetIds", qualifiedByName = ["getBaseSetsByIds"])
     abstract fun toBaseExercise(requestDto: BaseExerciseRequestDto): BaseExercise
 
     @Named("getMuscleGroupById")
@@ -41,7 +34,4 @@ abstract class BaseExerciseMapper {
         EntityNotFoundException("MuscleGroup not found with id: $id")
     }
 
-    @Named("getBaseSetsByIds")
-    protected fun getBaseSetsByIds(ids: List<UUID>):  MutableList<BaseSet> = baseSetRepository
-        .findAllById(ids).toMutableList()
 }

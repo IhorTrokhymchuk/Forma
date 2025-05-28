@@ -22,6 +22,7 @@ class BaseExercise {
     val id: UUID? = null
     @Column(nullable = false, unique = true)
     var name: String = ""
+    @Column(columnDefinition = "TEXT")
     var description: String? = null
     @ManyToOne(cascade = [CascadeType.DETACH, CascadeType.PERSIST], fetch = FetchType.LAZY)
     @JoinColumn(name = "muscle_group_id")
@@ -32,11 +33,5 @@ class BaseExercise {
     var mainImage: String? = null
     @Column(columnDefinition = "TEXT")
     var miniImage: String? = null
-    @JoinTable(
-        name = "base_exercises_base_sets",
-        joinColumns = [JoinColumn(name = "base_exercise_id")],
-        inverseJoinColumns = [JoinColumn(name = "base_set_id")]
-    )
-    @ManyToMany(cascade = [CascadeType.DETACH, CascadeType.PERSIST], fetch = FetchType.LAZY)
-    var baseSets: MutableList<BaseSet> = mutableListOf()
+
 }
