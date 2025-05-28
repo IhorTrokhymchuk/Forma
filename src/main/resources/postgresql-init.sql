@@ -24,7 +24,24 @@ INSERT INTO public.base_sets (kg, position, reps, id) VALUES (15, 2, 12, '63ef05
 INSERT INTO public.base_sets (kg, position, reps, id) VALUES (20, 3, 10, '27eb9c6b-5fdf-4b28-95c4-79ade5e0a94e');
 INSERT INTO public.base_sets (kg, position, reps, id) VALUES (30, 4, 18, '61cafa3c-2378-4074-8672-1c844f701f19');
 
-INSERT INTO public.base_exercises (id, muscle_group_id, description, main_image, mini_image, name, video_url) VALUES ('7aa41309-b881-43a8-8283-2bbea268e0a7', '8b5937c2-313d-4348-ac29-ad5bfda59bcb', 'description1', null, null, 'На груди', 'https://www.youtube.com/watch?v=MWNmDQHGgkc&ab_channel=%D0%A3%D0%A2-2');
-INSERT INTO public.base_exercises (id, muscle_group_id, description, main_image, mini_image, name, video_url) VALUES ('70405ed9-e168-4ba5-b4ee-2377bd6a5020', '0a480c10-cda8-4735-84b6-de0b0045192c', 'description1', null, null, 'На спину', 'https://www.youtube.com/watch?v=MWNmDQHGgkc&ab_channel=%D0%A3%D0%A2-2');
-INSERT INTO public.base_exercises (id, muscle_group_id, description, main_image, mini_image, name, video_url) VALUES ('d8916e44-4d52-4b58-9dea-dfb3eeb8d6e9', 'ae59d818-9493-45b9-8d7b-7918977f6103', 'description1', null, null, 'На біцепс', 'https://www.youtube.com/watch?v=MWNmDQHGgkc&ab_channel=%D0%A3%D0%A2-2');
+INSERT INTO public.base_exercises (id, muscle_group_id, description, main_image, mini_image, name, video_url) VALUES ('f3f0359f-b942-45d0-bb90-d091c607b4e4', 'ae59d818-9493-45b9-8d7b-7918977f6103', 'description1', null, null, 'На біцепс', 'https://www.youtube.com/watch?v=MWNmDQHGgkc&ab_channel=%D0%A3%D0%A2-2');
+INSERT INTO public.base_exercises (id, muscle_group_id, description, main_image, mini_image, name, video_url) VALUES ('da8d22a0-d9a2-4a52-928e-a931ac12251b', '8b5937c2-313d-4348-ac29-ad5bfda59bcb', 'description1', null, null, 'На груди', 'https://www.youtube.com/watch?v=MWNmDQHGgkc&ab_channel=%D0%A3%D0%A2-2');
+INSERT INTO public.base_exercises (id, muscle_group_id, description, main_image, mini_image, name, video_url) VALUES ('1ff2faa5-0c74-4fd8-b46c-29a8f856c866', '0a480c10-cda8-4735-84b6-de0b0045192c', 'description1', null, null, 'На спину', 'https://www.youtube.com/watch?v=MWNmDQHGgkc&ab_channel=%D0%A3%D0%A2-2');
+
+INSERT INTO public.base_exercises_base_sets (base_exercise_id, base_set_id) VALUES ('f3f0359f-b942-45d0-bb90-d091c607b4e4', 'ee3f008e-7b92-41fc-a20d-324b822fe001');
+INSERT INTO public.base_exercises_base_sets (base_exercise_id, base_set_id) VALUES ('f3f0359f-b942-45d0-bb90-d091c607b4e4', '63ef050f-66a9-4649-add1-fe8ef27cf107');
+INSERT INTO public.base_exercises_base_sets (base_exercise_id, base_set_id) VALUES ('f3f0359f-b942-45d0-bb90-d091c607b4e4', '27eb9c6b-5fdf-4b28-95c4-79ade5e0a94e');
+INSERT INTO public.base_exercises_base_sets (base_exercise_id, base_set_id) VALUES ('f3f0359f-b942-45d0-bb90-d091c607b4e4', '61cafa3c-2378-4074-8672-1c844f701f19');
+INSERT INTO public.base_exercises_base_sets (base_exercise_id, base_set_id) VALUES ('da8d22a0-d9a2-4a52-928e-a931ac12251b', 'ee3f008e-7b92-41fc-a20d-324b822fe001');
+INSERT INTO public.base_exercises_base_sets (base_exercise_id, base_set_id) VALUES ('da8d22a0-d9a2-4a52-928e-a931ac12251b', '63ef050f-66a9-4649-add1-fe8ef27cf107');
+INSERT INTO public.base_exercises_base_sets (base_exercise_id, base_set_id) VALUES ('da8d22a0-d9a2-4a52-928e-a931ac12251b', '27eb9c6b-5fdf-4b28-95c4-79ade5e0a94e');
+INSERT INTO public.base_exercises_base_sets (base_exercise_id, base_set_id) VALUES ('da8d22a0-d9a2-4a52-928e-a931ac12251b', '61cafa3c-2378-4074-8672-1c844f701f19');
+INSERT INTO public.base_exercises_base_sets (base_exercise_id, base_set_id) VALUES ('1ff2faa5-0c74-4fd8-b46c-29a8f856c866', 'ee3f008e-7b92-41fc-a20d-324b822fe001');
+INSERT INTO public.base_exercises_base_sets (base_exercise_id, base_set_id) VALUES ('1ff2faa5-0c74-4fd8-b46c-29a8f856c866', '63ef050f-66a9-4649-add1-fe8ef27cf107');
+INSERT INTO public.base_exercises_base_sets (base_exercise_id, base_set_id) VALUES ('1ff2faa5-0c74-4fd8-b46c-29a8f856c866', '27eb9c6b-5fdf-4b28-95c4-79ade5e0a94e');
+INSERT INTO public.base_exercises_base_sets (base_exercise_id, base_set_id) VALUES ('1ff2faa5-0c74-4fd8-b46c-29a8f856c866', '61cafa3c-2378-4074-8672-1c844f701f19');
+
+INSERT INTO public.base_ex_to_position (position, base_ex_id, id) VALUES (2, 'da8d22a0-d9a2-4a52-928e-a931ac12251b', 'cd967340-7a14-488b-90d8-5772bfa0226d');
+INSERT INTO public.base_ex_to_position (position, base_ex_id, id) VALUES (1, 'f3f0359f-b942-45d0-bb90-d091c607b4e4', 'f2570ca8-2274-4ed2-9ea6-f2e375a00ba3');
+INSERT INTO public.base_ex_to_position (position, base_ex_id, id) VALUES (3, '1ff2faa5-0c74-4fd8-b46c-29a8f856c866', '331c33cc-e80d-4118-b001-730075cdfa1a');
 
