@@ -1,6 +1,6 @@
 package alyona.forma.dto.baseextoposition
 
-import java.util.UUID
+import java.util.*
 
 class BaseExToPositionRequestDto(
     val baseExerciseId: UUID,

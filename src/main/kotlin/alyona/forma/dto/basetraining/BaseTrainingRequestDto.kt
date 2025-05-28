@@ -1,6 +1,6 @@
 package alyona.forma.dto.basetraining
 
-import java.util.UUID
+import java.util.*
 
 class BaseTrainingRequestDto(
     val name: String,

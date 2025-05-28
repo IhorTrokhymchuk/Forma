@@ -1,7 +1,7 @@
 package alyona.forma.dto.auth
 
 import alyona.forma.model.user.User
-import java.util.UUID
+import java.util.*
 
 data class UserRegisterDto(
     val email: String,

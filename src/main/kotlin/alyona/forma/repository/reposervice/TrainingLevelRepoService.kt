@@ -4,7 +4,7 @@ import alyona.forma.exception.EntityNotFoundException
 import alyona.forma.model.TrainingLevel
 import alyona.forma.repository.TrainingLevelRepository
 import org.springframework.stereotype.Service
-import java.util.UUID
+import java.util.*
 
 @Service
 class TrainingLevelRepoService(

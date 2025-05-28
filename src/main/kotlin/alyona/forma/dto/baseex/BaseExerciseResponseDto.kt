@@ -1,7 +1,6 @@
 package alyona.forma.dto.baseex
 
-import alyona.forma.dto.baseset.BaseSetResponseDto
-import java.util.UUID
+import java.util.*
 
 data class BaseExerciseResponseDto(
     val id: UUID,

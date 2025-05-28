@@ -1,7 +1,7 @@
 package alyona.forma.dto.user
 
 import java.time.Instant
-import java.util.UUID
+import java.util.*
 
 data class UserResponseDto(
     val id: UUID,

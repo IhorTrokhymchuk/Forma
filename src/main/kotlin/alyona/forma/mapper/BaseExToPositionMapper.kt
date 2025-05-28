@@ -1,6 +1,5 @@
 package alyona.forma.mapper
 
-import alyona.forma.dto.baseex.BaseExerciseResponseDto
 import alyona.forma.dto.baseextoposition.BaseExToPositionRequestDto
 import alyona.forma.dto.baseextoposition.BaseExToPositionResponseDto
 import alyona.forma.exception.EntityNotFoundException
@@ -14,7 +13,7 @@ import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 import org.mapstruct.Named
 import org.springframework.beans.factory.annotation.Autowired
-import java.util.UUID
+import java.util.*
 
 @Mapper(
     componentModel = "spring",

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import java.util.UUID
+import java.util.*
 
 @Service
 class BaseTrainingService(
@@ -33,6 +33,4 @@ class BaseTrainingService(
         }
         baseTrainingRepository.deleteById(id)
     }
-    
-    fun existsById(id: UUID): Boolean = baseTrainingRepository.existsById(id)
 }

@@ -2,7 +2,7 @@ package alyona.forma.dto.baseextoposition
 
 import alyona.forma.dto.baseex.BaseExerciseResponseDto
 import alyona.forma.dto.baseset.BaseSetResponseDto
-import java.util.UUID
+import java.util.*
 
 class BaseExToPositionResponseDto(
     val id: UUID,

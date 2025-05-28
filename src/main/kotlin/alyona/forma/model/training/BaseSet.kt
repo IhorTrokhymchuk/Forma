@@ -5,7 +5,7 @@ import jakarta.persistence.Entity
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import org.hibernate.annotations.UuidGenerator
-import java.util.UUID
+import java.util.*
 
 @Entity
 @Table(name = "base_sets")
