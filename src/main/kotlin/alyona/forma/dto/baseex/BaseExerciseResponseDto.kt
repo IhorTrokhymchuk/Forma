@@ -1,15 +1,15 @@
 package alyona.forma.dto.baseex
 
 import alyona.forma.dto.baseset.BaseSetResponseDto
+import java.util.UUID
 
-class BaseExerciseResponseDto(
-    val id: Long,
+data class BaseExerciseResponseDto(
+    val id: UUID,
     val name: String,
     val description: String?,
     val muscleGroupName: String,
-    val position: Long,
     val videoUrl: String,
     val mainImage: String?,
     val miniImage: String?,
-    val baseSets: MutableList<BaseSetResponseDto>
+    val baseSets: List<BaseSetResponseDto>
 )

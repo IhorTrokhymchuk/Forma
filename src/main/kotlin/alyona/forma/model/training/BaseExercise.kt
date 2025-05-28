@@ -27,8 +27,6 @@ class BaseExercise {
     @JoinColumn(name = "muscle_group_id")
     lateinit var muscleGroup: MuscleGroup
     @Column(nullable = false)
-    var position: Long = 0
-    @Column(nullable = false)
     var videoUrl: String = ""
     @Column(columnDefinition = "TEXT")
     var mainImage: String? = null
