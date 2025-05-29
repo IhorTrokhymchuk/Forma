@@ -13,6 +13,9 @@ import java.util.*
 class BaseTrainingService(
     private val baseTrainingRepository: BaseTrainingRepository
 ) {
+
+    fun findMin() : List<BaseTraining> = baseTrainingRepository.findAll()
+
     fun findAll(pageable: Pageable): Page<BaseTraining> = baseTrainingRepository.findAll(pageable)
     
     fun findById(id: UUID): BaseTraining = baseTrainingRepository.findById(id)

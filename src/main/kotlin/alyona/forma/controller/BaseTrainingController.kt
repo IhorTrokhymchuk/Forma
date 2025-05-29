@@ -1,5 +1,6 @@
 package alyona.forma.controller
 
+import alyona.forma.dto.basetraining.BaseTrainingMinResponseDto
 import alyona.forma.dto.basetraining.BaseTrainingRequestDto
 import alyona.forma.dto.basetraining.BaseTrainingResponseDto
 import alyona.forma.mapper.BaseTrainingMapper
@@ -17,6 +18,13 @@ class BaseTrainingController(
     private val baseTrainingService: BaseTrainingService,
     private val baseTrainingMapper: BaseTrainingMapper
 ) {
+    @GetMapping("/min")
+    @PreAuthorize("hasAuthority('USER')")
+    fun findMin(): List<BaseTrainingMinResponseDto> {
+        return baseTrainingService.findMin()
+            .map { baseTrainingMapper.toBaseTrainingMinResponseDto(it) }
+    }
+    
     @GetMapping
     @PreAuthorize("hasAuthority('USER')")
     fun findAll(pageable: Pageable): Page<BaseTrainingResponseDto> {
@@ -35,12 +43,6 @@ class BaseTrainingController(
     @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     fun create(@RequestBody requestDto: BaseTrainingRequestDto): BaseTrainingResponseDto {
-        println("-----controller start ")
-        requestDto.baseExToPositionIds.forEach { id ->
-            println(id)
-        }
-        println("-----controller end ")
-
         val baseTraining = baseTrainingMapper.toBaseTraining(requestDto)
         val savedBaseTraining = baseTrainingService.save(baseTraining)
         return baseTrainingMapper.toBaseTrainingResponseDto(savedBaseTraining)

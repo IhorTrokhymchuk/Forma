@@ -17,12 +17,6 @@ class BaseExToPositionController(
     private val baseExToPositionService: BaseExToPositionService,
     private val baseExToPositionMapper: BaseExToPositionMapper
 ) {
-    @GetMapping ("/min")
-    @PreAuthorize("hasAuthority('USER')")
-    fun findMin(pageable: Pageable): Page<BaseExToPositionResponseDto> {
-        return baseExToPositionService.findAll(pageable)
-            .map { baseExToPositionMapper.toBaseExToPositionResponseDto(it) }
-    }
     @GetMapping
     @PreAuthorize("hasAuthority('USER')")
     fun findAll(pageable: Pageable): Page<BaseExToPositionResponseDto> {
