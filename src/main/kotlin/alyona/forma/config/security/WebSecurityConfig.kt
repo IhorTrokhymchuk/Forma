@@ -24,7 +24,7 @@ class WebSecurityConfig(
             .csrf { it.disable() }
             .authorizeHttpRequests { authorize ->
                 authorize
-                    .requestMatchers("/auth/login", "/auth/registration").permitAll()
+                    .requestMatchers("/auth/login", "/auth/registration", "/training-level", "/base-trainings/min").permitAll()
                     .anyRequest().authenticated()
             }
             .headers { httpSecurityHeadersConfigurer ->

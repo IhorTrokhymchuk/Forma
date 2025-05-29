@@ -13,5 +13,6 @@ data class UserRegisterDto(
     val trainingLevelId: UUID,
     val weight: Long,
     val height: Long,
-    val daysPerWeek: Long
+    val daysPerWeek: Long,
+    val baseTrainingId: UUID
 )

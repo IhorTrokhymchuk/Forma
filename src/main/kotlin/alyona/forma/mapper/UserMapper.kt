@@ -13,6 +13,8 @@ import org.mapstruct.Mapping
 )
 abstract class UserMapper {
 
+
+    @Mapping(target = "baseTrainingName", source = "baseTraining.name")
     @Mapping(target = "trainingLevelDisplayName", source = "trainingLevel.displayName")
     abstract fun toUserResponseDto(user: User): UserResponseDto
 }

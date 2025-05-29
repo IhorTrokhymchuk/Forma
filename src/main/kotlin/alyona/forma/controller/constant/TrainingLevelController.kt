@@ -12,6 +12,5 @@ class TrainingLevelController(
     private val trainingLevelRepository: TrainingLevelRepository
 ) {
     @GetMapping
-    @PreAuthorize("hasAuthority('USER')")
     fun findAll() = trainingLevelRepository.findAll()
 }

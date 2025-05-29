@@ -3,8 +3,10 @@ package alyona.forma.service
 import alyona.forma.dto.auth.UseeLoginDto
 import alyona.forma.dto.auth.UserRegisterDto
 import alyona.forma.exception.EntityExistException
+import alyona.forma.exception.EntityNotFoundException
 import alyona.forma.model.user.RoleType
 import alyona.forma.model.user.User
+import alyona.forma.repository.BaseTrainingRepository
 import alyona.forma.repository.RoleTypeRepository
 import alyona.forma.repository.UserRepository
 import alyona.forma.repository.reposervice.TrainingLevelRepoService
@@ -22,7 +24,8 @@ class AuthService(
     private val trainingLevelRepoService: TrainingLevelRepoService,
     private val roleTypeRepository: RoleTypeRepository,
     private val passwordEncoder: PasswordEncoder,
-    private val jwtUtil: JWTUtil
+    private val jwtUtil: JWTUtil,
+    private val baseTrainingRepository: BaseTrainingRepository
 ) {
 
     @Transactional
@@ -32,7 +35,6 @@ class AuthService(
 
         val trainingLevel = trainingLevelRepoService.getById(request.trainingLevelId)
         val userRole = roleTypeRepository.getRoleTypesByName(RoleType.RoleName.USER)
-
         val newUser = User().apply {
             email = request.email
             userPassword = passwordEncoder.encode(request.password)
@@ -42,8 +44,12 @@ class AuthService(
             this.trainingLevel = trainingLevel
             age = request.age
             gender = request.gender
+            height = request.height
             weight = request.weight
             lastLogin = Instant.now()
+            daysPerWeek = request.daysPerWeek
+            baseTraining = baseTrainingRepository.findById(request.baseTrainingId)
+                .orElseThrow { EntityNotFoundException("BaseTraining not found with id: ${request.baseTrainingId}") }
         }
         userRepository.save(newUser)
 

@@ -1,6 +1,8 @@
 package alyona.forma.model.user
 
+import alyona.forma.model.training.BaseTraining
 import alyona.forma.model.trainingconst.TrainingLevel
+import alyona.forma.model.usertrainingplan.TrainingPlan
 import jakarta.persistence.*
 import org.hibernate.annotations.UuidGenerator
 import org.springframework.security.core.userdetails.UserDetails
@@ -31,6 +33,9 @@ class User : UserDetails {
     @ManyToOne(fetch = FetchType.EAGER, cascade = [CascadeType.DETACH, CascadeType.PERSIST])
     @JoinColumn(name = "training_level_id", nullable = false)
     lateinit var trainingLevel: TrainingLevel
+    @ManyToOne(fetch = FetchType.EAGER, cascade = [CascadeType.DETACH, CascadeType.PERSIST])
+    @JoinColumn(name = "base_training_id", nullable = false)
+    lateinit var baseTraining: BaseTraining
     var age: Long = -1
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, columnDefinition = "varchar")
@@ -39,7 +44,7 @@ class User : UserDetails {
     var height: Long = -1
     @Column(name = "last_login", nullable = true)
     var lastLogin: Instant = Instant.now()
-    @Column(name = "deys_per_week", nullable = false)
+    @Column(name = "days_per_week", nullable = false)
     var daysPerWeek: Long = 2
 
     enum class Gender {

@@ -12,6 +12,9 @@ data class UserResponseDto(
     val roles: List<RoleTypeResponseDto>,
     val lastLogin: Instant,
     val age: Long,
+    val height: Long,
     val weight: Long,
-    val gender: String
+    val gender: String,
+    val daysPerWeek: Long,
+    val baseTrainingName: String,
 )

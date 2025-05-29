@@ -19,12 +19,11 @@ class BaseTrainingController(
     private val baseTrainingMapper: BaseTrainingMapper
 ) {
     @GetMapping("/min")
-    @PreAuthorize("hasAuthority('USER')")
     fun findMin(): List<BaseTrainingMinResponseDto> {
         return baseTrainingService.findMin()
             .map { baseTrainingMapper.toBaseTrainingMinResponseDto(it) }
     }
-    
+
     @GetMapping
     @PreAuthorize("hasAuthority('USER')")
     fun findAll(pageable: Pageable): Page<BaseTrainingResponseDto> {
