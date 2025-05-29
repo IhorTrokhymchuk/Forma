@@ -1,0 +1,30 @@
+package alyona.forma.model.trainingconst
+
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
+import jakarta.persistence.Id
+import jakarta.persistence.Table
+import org.hibernate.annotations.UuidGenerator
+import java.util.UUID
+
+@Entity
+@Table(name = "tr_status")
+
+class TrStatus {
+    @Id
+    @UuidGenerator
+    val id: UUID? = null
+    @Column(name = "display_name", nullable = false, unique = true)
+    val displayName: String = ""
+    @Column(name = "name", nullable = false, unique = true, columnDefinition = "varchar")
+    @Enumerated(EnumType.STRING)
+    lateinit var name: TrStatusName
+
+    enum class TrStatusName {
+        PLANING,
+        IN_PROGRESS,
+        COMPLETED
+    }
+}

@@ -36,8 +36,11 @@ class User : UserDetails {
     @Column(nullable = false, columnDefinition = "varchar")
     lateinit var gender: Gender
     var weight: Long = -1
+    var height: Long = -1
     @Column(name = "last_login", nullable = true)
     var lastLogin: Instant = Instant.now()
+    @Column(name = "deys_per_week", nullable = false)
+    var daysPerWeek: Long = 2
 
     enum class Gender {
         MALE,

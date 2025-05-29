@@ -11,5 +11,7 @@ data class UserRegisterDto(
     val age: Long,
     val gender: User.Gender,
     val trainingLevelId: UUID,
-    val weight: Long
+    val weight: Long,
+    val height: Long,
+    val daysPerWeek: Long
 )

@@ -13,9 +13,6 @@ class BaseTraining {
     val id: UUID? = null
     @Column(nullable = false, unique = true)
     var name: String = ""
-    @ManyToOne(fetch = FetchType.EAGER, cascade = [CascadeType.PERSIST, CascadeType.DETACH])
-    @JoinColumn(name = "training_level_id")
-    lateinit var trainingLevel: TrainingLevel
     @JoinTable(
         name = "base_training_base_ex_to_position",
         joinColumns = [JoinColumn(name = "base_training_id")],

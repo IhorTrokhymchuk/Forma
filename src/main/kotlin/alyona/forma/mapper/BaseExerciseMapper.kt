@@ -18,18 +18,8 @@ import java.util.*
     injectionStrategy = InjectionStrategy.CONSTRUCTOR,
 )
 abstract class BaseExerciseMapper {
-    @Autowired
-    protected lateinit var muscleGroupRepository: MuscleGroupRepository
 
-    @Mapping(target = "muscleGroupName", source = "muscleGroup.name")
     abstract fun toBaseExerciseResponseDto(baseExercise: BaseExercise): BaseExerciseResponseDto
 
-    @Mapping(target = "muscleGroup", source = "muscleGroupId", qualifiedByName = ["getMuscleGroupById"])
     abstract fun toBaseExercise(requestDto: BaseExerciseRequestDto): BaseExercise
-
-    @Named("getMuscleGroupById")
-    protected fun getMuscleGroupById(id: UUID): MuscleGroup = muscleGroupRepository.findById(id).orElseThrow {
-        EntityNotFoundException("MuscleGroup not found with id: $id")
-    }
-
 }
