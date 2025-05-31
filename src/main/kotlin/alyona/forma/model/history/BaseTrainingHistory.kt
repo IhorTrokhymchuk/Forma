@@ -14,11 +14,8 @@ class BaseTrainingHistory {
     @Id
     @UuidGenerator
     val id: UUID? = null
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     var name: String = ""
-    @ManyToOne(fetch = FetchType.EAGER, cascade = [CascadeType.PERSIST, CascadeType.DETACH])
-    @JoinColumn(name = "training_level_id")
-    lateinit var trainingLevel: TrainingLevel
     @JoinTable(
         name = "base_trainings_history_base_ex_to_position",
         joinColumns = [JoinColumn(name = "base_training_id")],

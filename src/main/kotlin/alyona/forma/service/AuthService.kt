@@ -12,6 +12,7 @@ import alyona.forma.repository.UserRepository
 import alyona.forma.repository.reposervice.TrainingLevelRepoService
 import alyona.forma.repository.reposervice.UserRepoService
 import alyona.forma.security.JWTUtil
+import alyona.forma.service.history.BaseTrainingHistoryService
 import jakarta.transaction.Transactional
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -25,7 +26,8 @@ class AuthService(
     private val roleTypeRepository: RoleTypeRepository,
     private val passwordEncoder: PasswordEncoder,
     private val jwtUtil: JWTUtil,
-    private val baseTrainingRepository: BaseTrainingRepository
+    private val baseTrainingRepository: BaseTrainingRepository,
+    private val baseTrainingHistoryService: BaseTrainingHistoryService
 ) {
 
     @Transactional
@@ -52,7 +54,7 @@ class AuthService(
                 .orElseThrow { EntityNotFoundException("BaseTraining not found with id: ${request.baseTrainingId}") }
         }
         userRepository.save(newUser)
-
+        baseTrainingHistoryService.planTraining(newUser, Instant.now())
         return true
     }
 

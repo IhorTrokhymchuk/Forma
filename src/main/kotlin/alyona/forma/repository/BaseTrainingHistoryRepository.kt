@@ -9,5 +9,5 @@ import java.util.*
 @Repository
 interface BaseTrainingHistoryRepository : JpaRepository<BaseTrainingHistory, UUID> {
     
-    fun findByUser(user: User): List<BaseTrainingHistory>
+    fun findByUser_Id(userId: UUID): List<BaseTrainingHistory>
 }

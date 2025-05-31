@@ -20,6 +20,8 @@ class TrainingLevel {
     @Column(name = "name", nullable = false, unique = true, columnDefinition = "varchar")
     @Enumerated(EnumType.STRING)
     lateinit var name: TrainingLevelName
+    @Column(nullable = false)
+    var koef: Double = 1.0
 
     enum class TrainingLevelName {
         BEGINNER,
