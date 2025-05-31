@@ -14,7 +14,7 @@ class BaseSetService(
     private val baseSetRepository: BaseSetRepository
 ) {
     
-    fun findAll(pageable: Pageable): Page<BaseSet> = baseSetRepository.findAll(pageable)
+    fun findAll(): List<BaseSet> = baseSetRepository.findAll()
     
     fun findById(id: UUID): BaseSet = baseSetRepository.findById(id)
         .orElseThrow { EntityNotFoundException("BaseSet not found with id: $id") }

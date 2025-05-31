@@ -16,6 +16,7 @@ import java.time.DayOfWeek
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
+import java.util.UUID
 import kotlin.math.round
 
 @Service
@@ -27,6 +28,12 @@ class BaseTrainingHistoryService(
         return user.id?.let { baseTrainingHistoryRepository.findByUser_Id(it) }
             ?: throw EntityNotFoundException("User not found")
     }
+    
+    fun findById(id: UUID): BaseTrainingHistory {
+        return baseTrainingHistoryRepository.findById(id)
+            .orElseThrow { EntityNotFoundException("BaseTrainingHistory with id $id not found") }
+    }
+
     @Transactional
     fun planTraining(
         user: User,

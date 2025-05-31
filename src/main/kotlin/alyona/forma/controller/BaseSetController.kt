@@ -19,8 +19,8 @@ class BaseSetController(
 ) {
     @GetMapping
     @PreAuthorize("hasAuthority('USER')")
-    fun findAll(pageable: Pageable): Page<BaseSetResponseDto> {
-        return baseSetService.findAll(pageable)
+    fun findAll(): List<BaseSetResponseDto> {
+        return baseSetService.findAll()
             .map { baseSetMapper.toBaseSetResponseDto(it) }
     }
 

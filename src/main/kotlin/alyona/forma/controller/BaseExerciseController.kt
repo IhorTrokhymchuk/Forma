@@ -20,8 +20,8 @@ class BaseExerciseController(
 
     @GetMapping
     @PreAuthorize("hasAuthority('USER')")
-    fun findAll(pageable: Pageable): Page<BaseExerciseResponseDto> {
-        return baseExerciseService.findAll(pageable)
+    fun findAll(): List<BaseExerciseResponseDto> {
+        return baseExerciseService.findAll()
             .map { baseExerciseMapper.toBaseExerciseResponseDto(it) }
     }
 

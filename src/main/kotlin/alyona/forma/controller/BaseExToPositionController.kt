@@ -19,8 +19,8 @@ class BaseExToPositionController(
 ) {
     @GetMapping
     @PreAuthorize("hasAuthority('USER')")
-    fun findAll(pageable: Pageable): Page<BaseExToPositionResponseDto> {
-        return baseExToPositionService.findAll(pageable)
+    fun findAll(): List<BaseExToPositionResponseDto> {
+        return baseExToPositionService.findAll()
             .map { baseExToPositionMapper.toBaseExToPositionResponseDto(it) }
     }
 

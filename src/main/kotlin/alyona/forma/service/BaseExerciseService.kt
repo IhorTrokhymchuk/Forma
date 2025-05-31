@@ -14,7 +14,7 @@ import java.util.*
 class BaseExerciseService(
     private val baseExerciseRepository: BaseExerciseRepository
 ) {
-    fun findAll(pageable: Pageable): Page<BaseExercise> = baseExerciseRepository.findAll(pageable)
+    fun findAll(): List<BaseExercise> = baseExerciseRepository.findAll()
     
     fun findById(id: UUID): BaseExercise = baseExerciseRepository.findById(id)
         .orElseThrow { EntityNotFoundException("BaseExercise not found with id: $id") }

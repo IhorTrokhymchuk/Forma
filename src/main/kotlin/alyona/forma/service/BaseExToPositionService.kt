@@ -13,7 +13,7 @@ import java.util.*
 class BaseExToPositionService(
     private val baseExToPositionRepository: BaseExToPositionRepository
 ) {
-    fun findAll(pageable: Pageable): Page<BaseExToPosition> = baseExToPositionRepository.findAll(pageable)
+    fun findAll(): List<BaseExToPosition> = baseExToPositionRepository.findAll()
     
     fun findById(id: UUID): BaseExToPosition = baseExToPositionRepository.findById(id)
         .orElseThrow { EntityNotFoundException("BaseExToPosition not found with id: $id") }
