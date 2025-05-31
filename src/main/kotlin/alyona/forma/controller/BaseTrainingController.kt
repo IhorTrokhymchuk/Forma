@@ -26,8 +26,8 @@ class BaseTrainingController(
 
     @GetMapping
     @PreAuthorize("hasAuthority('USER')")
-    fun findAll(pageable: Pageable): Page<BaseTrainingResponseDto> {
-        return baseTrainingService.findAll(pageable)
+    fun findAll(): List<BaseTrainingResponseDto> {
+        return baseTrainingService.findAll()
             .map { baseTrainingMapper.toBaseTrainingResponseDto(it) }
     }
 

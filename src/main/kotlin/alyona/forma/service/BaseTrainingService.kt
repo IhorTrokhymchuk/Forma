@@ -16,7 +16,7 @@ class BaseTrainingService(
 
     fun findMin() : List<BaseTraining> = baseTrainingRepository.findAll()
 
-    fun findAll(pageable: Pageable): Page<BaseTraining> = baseTrainingRepository.findAll(pageable)
+    fun findAll(): List<BaseTraining> = baseTrainingRepository.findAll()
     
     fun findById(id: UUID): BaseTraining = baseTrainingRepository.findById(id)
         .orElseThrow { EntityNotFoundException("BaseTraining not found with id: $id") }
