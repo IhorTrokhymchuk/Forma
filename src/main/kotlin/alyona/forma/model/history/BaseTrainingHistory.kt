@@ -6,6 +6,7 @@ import alyona.forma.model.user.User
 import jakarta.persistence.*
 import org.hibernate.annotations.UuidGenerator
 import java.time.Instant
+import java.time.LocalDate
 import java.util.*
 
 @Entity
@@ -21,12 +22,12 @@ class BaseTrainingHistory {
         joinColumns = [JoinColumn(name = "base_training_id")],
         inverseJoinColumns = [JoinColumn(name = "base_ex_to_position_history_id")]
     )
-    @ManyToMany(cascade = [CascadeType.DETACH, CascadeType.PERSIST], fetch = FetchType.LAZY)
+    @ManyToMany(cascade = [CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE], fetch = FetchType.LAZY)
     var baseExToPositions: MutableList<BaseExToPositionHistory> = mutableListOf()
     @Column(columnDefinition = "TEXT")
     var description: String? = null
     @Column(name = "date_time", nullable = false)
-    var dateTime: Instant = Instant.now()
+    var dateTime: LocalDate = LocalDate.now()
     @ManyToOne(fetch = FetchType.EAGER, cascade = [CascadeType.PERSIST, CascadeType.DETACH])
     @JoinColumn(name = "user_id", nullable = false)
     lateinit var user: User

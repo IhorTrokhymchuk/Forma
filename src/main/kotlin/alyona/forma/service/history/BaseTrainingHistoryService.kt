@@ -1,5 +1,6 @@
 package alyona.forma.service.history
 
+import alyona.forma.dto.statistic.StatusCountDto
 import alyona.forma.exception.EntityNotFoundException
 import alyona.forma.model.history.BaseExToPositionHistory
 import alyona.forma.model.history.BaseSetHistory
@@ -24,6 +25,47 @@ class BaseTrainingHistoryService(
     private val baseTrainingHistoryRepository: BaseTrainingHistoryRepository,
     private val trStatusRepository: TrStatusRepository,
 ) {
+    fun startTraining(id: UUID) : BaseTrainingHistory {
+        val trainingHistory = baseTrainingHistoryRepository.findById(id)
+            .orElseThrow { EntityNotFoundException("BaseTrainingHistory with id $id not found") }
+        val progresStatus = trStatusRepository.findTrStatusByName(TrStatus.TrStatusName.IN_PROGRESS)
+        trainingHistory.trStatus = progresStatus
+        trainingHistory.baseExToPositions.forEach {
+            it.trStatus = progresStatus
+        }
+        return baseTrainingHistoryRepository.save(trainingHistory)
+    }
+
+    fun finishTraining(id: UUID) : BaseTrainingHistory {
+        val trainingHistory = baseTrainingHistoryRepository.findById(id)
+            .orElseThrow { EntityNotFoundException("BaseTrainingHistory with id $id not found") }
+        trainingHistory.baseExToPositions.forEach { exToPos ->
+            if (exToPos.trStatus.name != TrStatus.TrStatusName.COMPLETED)
+                throw RuntimeException("Training is not completed")
+        }
+        trainingHistory.trStatus = trStatusRepository.findTrStatusByName(TrStatus.TrStatusName.COMPLETED)
+        return baseTrainingHistoryRepository.save(trainingHistory)
+    }
+
+    fun statisticByStatus(user: User, from: LocalDate, to: LocalDate): List<StatusCountDto> {
+        return user.id?.let {
+            baseTrainingHistoryRepository.countByStatusDisplayNameBetweenDates(it, from, to)
+        } ?: throw EntityNotFoundException("User not found")
+    }
+
+    fun findLastCompletedByUser(user: User): BaseTrainingHistory {
+        return user.id?.let {
+            baseTrainingHistoryRepository.findLastByUserIdAndTrStatusName(it, TrStatus.TrStatusName.COMPLETED)
+                .orElseThrow { EntityNotFoundException("BaseTrainingHistory not found") }
+        } ?: throw EntityNotFoundException("User not found")
+    }
+    fun findAllByUserAndFromTo(user: User, from: LocalDate, to: LocalDate): List<BaseTrainingHistory> {
+        return user.id?.let {
+            baseTrainingHistoryRepository.findByUserIdAndDates(it, from, to)
+        } ?: throw EntityNotFoundException("User not found")
+    }
+
+
     fun findAllByUser(user: User): List<BaseTrainingHistory> {
         return user.id?.let { baseTrainingHistoryRepository.findByUser_Id(it) }
             ?: throw EntityNotFoundException("User not found")
@@ -37,7 +79,7 @@ class BaseTrainingHistoryService(
     @Transactional
     fun planTraining(
         user: User,
-        trainingDate: Instant,
+        trainingDate: LocalDate,
     ) {
         val baseTraining = user.baseTraining
         val resKoef = TrainingCoefficientsUtil.calculateResistanceCoefficient(user)
@@ -48,14 +90,14 @@ class BaseTrainingHistoryService(
 
     private fun mapToHistory(
         baseTraining: BaseTraining,
-        trainingDate: Instant,
+        trainingDate: LocalDate,
         resKoef: Double,
         daysPerWeek: Long,
         user: User
     ): MutableList<BaseTrainingHistory> {
         val planingStatus = trStatusRepository.findTrStatusByName(TrStatus.TrStatusName.PLANING)
        //todo: for May use
-        val dates = getDates(trainingDate.plusSeconds(60 * 60 * 24 * 5), daysPerWeek)
+        val dates = getDates(trainingDate, daysPerWeek)
         return dates.map { date ->
             val bth = BaseTrainingHistory()
             bth.name = baseTraining.name
@@ -82,11 +124,9 @@ class BaseTrainingHistoryService(
     }
 
     private fun getDates (
-        trainingDate: Instant,
+        today: LocalDate,
         daysPerWeek: Long
-    ): List<Instant> {
-        val zoneId = ZoneId.systemDefault()
-        val today = LocalDate.ofInstant(trainingDate, zoneId)
+    ): List<LocalDate> {
         val endOfMonth = today.withDayOfMonth(today.lengthOfMonth())
 
         val trainingDays = when (daysPerWeek) {
@@ -95,17 +135,36 @@ class BaseTrainingHistoryService(
             else -> throw Exception("Unknown days per week")
         }
 
-        val result = mutableListOf<Instant>()
+        val result = mutableListOf<LocalDate>()
 
         var date = today
         while (!date.isAfter(endOfMonth)) {
             if (trainingDays.contains(date.dayOfWeek)) {
-                result.add(date.atStartOfDay(zoneId).plusHours(19).toInstant())
+                result.add(date)
             }
             date = date.plusDays(1)
         }
 
         return result
+    }
+
+    fun weightStatisticByUserAndDate(user: User, from: LocalDate, to: LocalDate): MutableMap<LocalDate, Long> {
+         return user.id?.let {
+             val copletedTrainings = baseTrainingHistoryRepository.findByUserIdAndDatesAndStatusName(it, from, to, TrStatus.TrStatusName.COMPLETED)
+             val resultMap = mutableMapOf<LocalDate, Long>()
+             copletedTrainings.forEach { training ->
+                 val date = training.dateTime
+                 val totalWeight = training.baseExToPositions
+                     .filter { exToPos -> exToPos.trStatus.name == TrStatus.TrStatusName.COMPLETED }
+                     .sumOf { exToPos ->
+                         exToPos.baseSets.sumOf { bs ->
+                             bs.kg * bs.reps
+                         }
+                     }
+                 resultMap.put(date, totalWeight)
+             }
+             resultMap
+         } ?: throw EntityNotFoundException("User not found")
     }
 
 }

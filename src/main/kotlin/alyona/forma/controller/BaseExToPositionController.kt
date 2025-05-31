@@ -17,6 +17,7 @@ class BaseExToPositionController(
     private val baseExToPositionService: BaseExToPositionService,
     private val baseExToPositionMapper: BaseExToPositionMapper
 ) {
+
     @GetMapping
     @PreAuthorize("hasAuthority('USER')")
     fun findAll(): List<BaseExToPositionResponseDto> {

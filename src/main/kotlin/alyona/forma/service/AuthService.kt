@@ -17,6 +17,7 @@ import jakarta.transaction.Transactional
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.time.Instant
+import java.time.LocalDate
 
 @Service
 class AuthService(
@@ -52,9 +53,10 @@ class AuthService(
             daysPerWeek = request.daysPerWeek
             baseTraining = baseTrainingRepository.findById(request.baseTrainingId)
                 .orElseThrow { EntityNotFoundException("BaseTraining not found with id: ${request.baseTrainingId}") }
+            createdAt = LocalDate.now()
         }
         userRepository.save(newUser)
-        baseTrainingHistoryService.planTraining(newUser, Instant.now())
+        baseTrainingHistoryService.planTraining(newUser, LocalDate.now())
         return true
     }
 

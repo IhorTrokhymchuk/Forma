@@ -41,6 +41,11 @@ class CustomGlobalExceptionHandler : ResponseEntityExceptionHandler() {
     fun handleCustomException(ex: EntityNotFoundException): ResponseEntity<Any> {
         return getObjectResponseEntity(ex.message, HttpStatus.NOT_FOUND)
     }
+    
+    @ExceptionHandler(RuntimeException::class)
+    fun handleCustomException(ex: RuntimeException): ResponseEntity<Any> {
+        return getObjectResponseEntity(ex.message, HttpStatus.NOT_FOUND)
+    }
 
     @ExceptionHandler(EntityExistException::class)
     fun handleCustomException(ex: EntityExistException): ResponseEntity<Any> {

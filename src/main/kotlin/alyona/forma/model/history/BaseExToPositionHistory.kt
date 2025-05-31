@@ -22,7 +22,7 @@ class BaseExToPositionHistory {
         joinColumns = [JoinColumn(name = "base_ex_to_position_history_id")],
         inverseJoinColumns = [JoinColumn(name = "base_set_history_id")]
     )
-    @ManyToMany(cascade = [CascadeType.DETACH, CascadeType.PERSIST], fetch = FetchType.LAZY)
+    @ManyToMany(cascade = [CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE], fetch = FetchType.LAZY)
     var baseSets: MutableList<BaseSetHistory> = mutableListOf()
     @ManyToOne(fetch = FetchType.EAGER, cascade = [CascadeType.PERSIST, CascadeType.DETACH])
     @JoinColumn(name = "tr_status_id", nullable = false)

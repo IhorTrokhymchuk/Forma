@@ -1,6 +1,5 @@
 package alyona.forma.model.training
 
-import alyona.forma.model.trainingconst.MuscleGroup
 import jakarta.persistence.*
 import org.hibernate.annotations.UuidGenerator
 import java.util.*

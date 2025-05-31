@@ -12,7 +12,6 @@ import javax.sql.DataSource
 class DatabaseInit(
     private val dataSource: DataSource
 ) {
-
     @PostConstruct
     fun initializeDatabase() {
         val script = ClassPathResource("postgresql-init.sql")

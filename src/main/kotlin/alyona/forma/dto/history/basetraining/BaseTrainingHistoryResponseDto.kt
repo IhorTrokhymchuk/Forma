@@ -5,6 +5,7 @@ import alyona.forma.dto.history.baseextoposition.BaseExToPositionHistoryResponse
 import alyona.forma.model.history.BaseExToPositionHistory
 import alyona.forma.model.trainingconst.TrStatus
 import java.time.Instant
+import java.time.LocalDate
 import java.util.UUID
 
 class BaseTrainingHistoryResponseDto(
@@ -12,6 +13,6 @@ class BaseTrainingHistoryResponseDto(
     val name: String,
     val description: String?,
     val baseExToPositions: List<BaseExToPositionHistoryResponseDto>,
-    val dateTime: Instant,
+    val dateTime: LocalDate,
     val trStatusDisplayName: String
 )

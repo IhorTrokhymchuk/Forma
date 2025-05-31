@@ -1,6 +1,7 @@
 package alyona.forma.dto.user
 
 import java.time.Instant
+import java.time.LocalDate
 import java.util.*
 
 data class UserResponseDto(
@@ -17,4 +18,5 @@ data class UserResponseDto(
     val gender: String,
     val daysPerWeek: Long,
     val baseTrainingName: String,
+    val createdAt: LocalDate
 )

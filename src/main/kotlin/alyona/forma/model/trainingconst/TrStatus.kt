@@ -25,6 +25,7 @@ class TrStatus {
     enum class TrStatusName {
         PLANING,
         IN_PROGRESS,
-        COMPLETED
+        COMPLETED,
+        MISSED
     }
 }

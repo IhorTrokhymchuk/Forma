@@ -7,6 +7,7 @@ import jakarta.persistence.*
 import org.hibernate.annotations.UuidGenerator
 import org.springframework.security.core.userdetails.UserDetails
 import java.time.Instant
+import java.time.LocalDate
 import java.util.*
 
 @Entity
@@ -46,6 +47,9 @@ class User : UserDetails {
     var lastLogin: Instant = Instant.now()
     @Column(name = "days_per_week", nullable = false)
     var daysPerWeek: Long = 2
+    @Column(name = "created_at", nullable = false)
+    var createdAt: LocalDate = LocalDate.now()
+
 
     enum class Gender {
         MALE,
